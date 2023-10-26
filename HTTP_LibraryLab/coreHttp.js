@@ -1,54 +1,75 @@
-const url = "https://jsonplaceholder.typicode.com/posts"
-class Core {
-    //constructor for the url 
-        //currently hardcoded but need to make it dynamic later
-    constructor(url) {
-        this.url = url;
-    }
-    
-    async Get(url) { 
-        fetch(url)
-            .then(response => {
-                if(response.ok) {
-                    return response.json();
-                } else {
-                    throw new Error('failed to fetch JSON');
-                }
-            })
+class CoreHttp {
 
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error: ', error);
-            });
-
-
-        // //Fix Request Options
-        // const requestOptions = {
-        //     method: "GET",
-        //     //has to be the correct content type 'application/json'
-        //     headers: {"Content-Type": 'application/json'},
-        //     //use stringify in post 
-        //     //body: JSON.stringify(url)
-        // }
-        // const response = await fetch(url , requestOptions);
-        // console.log(response);
-        // if(response.ok) {
-        //     const posts = await response.json();
-        //     return posts;
-        // } else {
-        //     const err = response.status();
-        //     return err;
-        // }
+    async Get(url) {
+        const opt = {
+            method: "GET",
+            headers: {
+                'Content-Type': 'appication/json',
+            }
+        }
+        try {
+            const response = await fetch(url, opt);
+            if(!response.ok) {
+                throw new Error(`GET Error: ${response.status}`);
+            }
+            const data = await response.json();
+            return data;
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
-    //post
-    async Post(){
+    async Post(url, data) {
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          if (!response.ok) {
+            throw new Error(`POST Error: ${response.status}`);
+          }
+          const responseData = await response.json();
+          return responseData;
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
 
-    }
-    //put
+      async Put(url, data) {
+        console.log(data);
+        try {
+          const response = await fetch(url, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          });
+          if (!response.ok) {
+            throw new Error(`PUT Error: ${response.status}`);
+          }
+          const responseData = await response.json();
+          return responseData;
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
 
-    //delete
+      async delete(url) {
+        console.log('deleted');
+        try {
+          const response = await fetch(url, {
+            method: 'DELETE',
+          });
+          if (!response.ok) {
+            throw new Error(`DELETE Error: ${response.status}`);
+          }
+          return 'User Deleted';
+        } catch (error) {
+          throw new Error(error);
+        }
+      }
 }
-

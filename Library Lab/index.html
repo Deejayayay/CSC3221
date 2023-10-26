@@ -3,18 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Http Core</title>
-    <link rel="stylesheet" href="styles/style.css">
+    <title>Http Library</title>
 </head>
 <body>
-    <div class="page-area">
-        <h2 id="page-title">CoreHTTP Library</h2>
-        <form if="request-form">
+    <div>
+        <h2>Http Library Project</h2>
+        <form id="request-form"> 
             <div>
                 <label for="route">Route</label>
-                <input type="url" name="url"
+                <input type="url" name="url" 
                 id="route" class="full-width"
-                value="https://jsonplaceholder.typicode.com/posts"
+                value="https://jsonplaceholder.typicode.com/posts"                
                 pattern="https://.*" size="50"
                 required>
             </div>
@@ -35,14 +34,14 @@
                   <input type="submit" value="SEND" class="primary-button" id="SendReq">
                 </div>
               </fieldset>
-            </form>
-            <h4>Response:</h4>
-            <section id="response"> 
-                
-            </section>
+        </form>
+        <h4>Response:</h4>
+        <section id="response">
+    
+        </section>
     </div>
-
-    <script src="coreHttp.js"></script>
+    
+    <script src="coreHTTP.js"></script>
     <script src="scripts.js"></script>
 </body>
 </html>
